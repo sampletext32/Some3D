@@ -13,24 +13,7 @@ namespace Some3D
         public float AspectRatio { get; set; }
         public float FOV { get; set; }
 
-        public MatrixF ProjectionMatrix
-        {
-            get
-            {
-                var matrixF = new MatrixF(4, 4);
-
-                float inverseFOV = (float) (1 / Math.Tan(FOV / 2 * Math.PI / 180f));
-                float clippingTrapezeRelation = ZFar / (ZFar - ZNear);
-
-                matrixF[0, 0] = AspectRatio * inverseFOV;
-                matrixF[1, 1] = inverseFOV;
-                matrixF[2, 2] = clippingTrapezeRelation;
-                matrixF[3, 2] = -clippingTrapezeRelation * ZNear;
-                matrixF[2, 3] = 1;
-
-                return matrixF;
-            }
-        }
+        public MatrixF ProjectionMatrix { get; private set; }
 
         public Camera()
         {
@@ -42,6 +25,22 @@ namespace Some3D
             ZNear = zNear;
             AspectRatio = aspectRatio;
             FOV = fov;
+
+            MakeProjectionMatrix();
+        }
+
+        private void MakeProjectionMatrix()
+        {
+            ProjectionMatrix = new MatrixF(4, 4);
+
+            float inverseFOV = (float) (1 / Math.Tan(FOV / 2 * Math.PI / 180f));
+            float clippingTrapezeRelation = ZFar / (ZFar - ZNear);
+
+            ProjectionMatrix[0, 0] = AspectRatio * inverseFOV;
+            ProjectionMatrix[1, 1] = inverseFOV;
+            ProjectionMatrix[2, 2] = clippingTrapezeRelation;
+            ProjectionMatrix[3, 2] = -clippingTrapezeRelation * ZNear;
+            ProjectionMatrix[2, 3] = 1;
         }
     }
 }
