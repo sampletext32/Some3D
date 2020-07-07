@@ -60,9 +60,9 @@ namespace Some3D
         {
             while (NativeMethods.AppIsIdle())
             {
+                screen.Clear();
                 renderer.Render(world, camera, screen);
                 Refresh();
-                screen.Clear();
             }
         }
 
