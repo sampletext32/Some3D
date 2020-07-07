@@ -72,7 +72,12 @@ namespace Some3D
 
         public static void Line(DirectBitmap bitmap, float startX, float startY, float endX, float endY, int color)
         {
-            Line(bitmap, (int)startX, (int)startY, (int)endX, (int)endY, color);
+            Line(bitmap, (int) startX, (int) startY, (int) endX, (int) endY, color);
+        }
+
+        public static void Line(DirectBitmap bitmap, Vector3f start, Vector3f end, int color)
+        {
+            Line(bitmap, (int) start.X, (int) start.Y, (int) end.Y, (int) end.Y, color);
         }
     }
 }

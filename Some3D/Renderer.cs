@@ -36,11 +36,7 @@ namespace Some3D
 
                     for (int i = 0; i < 3; i++)
                     {
-                        SomeDrawing.Line(screen,
-                            _tri[i].X,
-                            _tri[i].Y,
-                            _tri[(i + 1) % 3].X,
-                            _tri[(i + 1) % 3].Y, unchecked((int) 0xFF000000));
+                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int) 0xFF000000));
                     }
                 }
             }
