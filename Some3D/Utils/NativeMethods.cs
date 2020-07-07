@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace Some3D
+namespace Some3D.Utils
 {
     public class NativeMethods
     {

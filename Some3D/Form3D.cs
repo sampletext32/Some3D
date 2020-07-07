@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Some3D.Render;
+using Some3D.Utils;
 
 namespace Some3D
 {

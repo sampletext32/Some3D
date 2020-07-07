@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Some3D
+namespace Some3D.Utils
 {
     public class DirectBitmap : IDisposable
     {

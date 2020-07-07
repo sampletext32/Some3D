@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Some3D.Utils;
 
-namespace Some3D
+namespace Some3D.Render
 {
     public class Cube : Mesh
     {
