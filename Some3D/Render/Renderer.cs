@@ -33,7 +33,7 @@ namespace Some3D.Render
 
                     for (int i = 0; i < 3; i++)
                     {
-                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int) 0xFF000000));
+                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFF000000));
                     }
                 }
             }

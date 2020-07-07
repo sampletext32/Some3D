@@ -25,7 +25,7 @@ namespace Some3D.Render
             get => _zNear;
             set
             {
-                _zNear = value; 
+                _zNear = value;
                 MakeProjectionMatrix();
             }
         }
@@ -68,7 +68,7 @@ namespace Some3D.Render
 
         private void MakeProjectionMatrix()
         {
-            float inverseFOV = (float) (1 / Math.Tan(FOV / 2 * Math.PI / 180f));
+            float inverseFOV = (float)(1 / Math.Tan(FOV / 2 * Math.PI / 180f));
             float clippingTrapezeRelation = ZFar / (ZFar - ZNear);
 
             ProjectionMatrix[0, 0] = AspectRatio * inverseFOV;

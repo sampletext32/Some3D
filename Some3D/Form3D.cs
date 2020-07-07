@@ -49,7 +49,7 @@ namespace Some3D
             world.Meshes.Add(mesh);
 
             screen = new DirectBitmap(ClientSize.Width, ClientSize.Height);
-            camera = new Camera(10000, 0, (float) screen.Height / screen.Width, 90);
+            camera = new Camera(10000, 0, (float)screen.Height / screen.Width, 90);
 
             camera.Position = new Vector3f(0, 0, -2);
 
