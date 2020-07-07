@@ -26,9 +26,11 @@ namespace Some3D
             Z = z;
         }
 
-        public Vector3f Duplicate()
+        public void Duplicate(Vector3f to)
         {
-            return new Vector3f(X, Y, Z);
+            to.X = X;
+            to.Y = Y;
+            to.Z = Z;
         }
 
         public static Vector3f operator *(Vector3f vec, MatrixF m)

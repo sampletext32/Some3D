@@ -27,13 +27,11 @@ namespace Some3D
             Points = new Vector3f[] {p1, p2, p3};
         }
 
-        public Triangle Duplicate()
+        public void Duplicate(Triangle to)
         {
-            return new Triangle(
-                Points[0].Duplicate(),
-                Points[1].Duplicate(),
-                Points[2].Duplicate()
-            );
+            Points[0].Duplicate(to[0]);
+            Points[1].Duplicate(to[1]);
+            Points[2].Duplicate(to[2]);
         }
     }
 }
