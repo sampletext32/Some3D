@@ -5,12 +5,52 @@ namespace Some3D.Render
 {
     public class Camera : Object3D
     {
-        public float ZFar { get; set; }
-        public float ZNear { get; set; }
-        public float AspectRatio { get; set; }
-        public float FOV { get; set; }
+        private float _zFar;
+        private float _zNear;
+        private float _aspectRatio;
+        private float _fov;
 
-        public MatrixF ProjectionMatrix { get; private set; }
+        public float ZFar
+        {
+            get { return _zFar; }
+            set
+            {
+                _zFar = ZFar;
+                MakeProjectionMatrix();
+            }
+        }
+
+        public float ZNear
+        {
+            get => _zNear;
+            set
+            {
+                _zNear = value; 
+                MakeProjectionMatrix();
+            }
+        }
+
+        public float AspectRatio
+        {
+            get => _aspectRatio;
+            set
+            {
+                _aspectRatio = value;
+                MakeProjectionMatrix();
+            }
+        }
+
+        public float FOV
+        {
+            get => _fov;
+            set
+            {
+                _fov = value;
+                MakeProjectionMatrix();
+            }
+        }
+
+        public MatrixF ProjectionMatrix { get; }
 
         public Camera()
         {
@@ -18,11 +58,10 @@ namespace Some3D.Render
 
         public Camera(float zFar, float zNear, float aspectRatio, float fov)
         {
-            ZFar = zFar;
-            ZNear = zNear;
-            AspectRatio = aspectRatio;
-            FOV = fov;
-
+            _zFar = zFar;
+            _zNear = zNear;
+            _aspectRatio = aspectRatio;
+            _fov = fov;
             ProjectionMatrix = new MatrixF(4, 4);
             MakeProjectionMatrix();
         }
