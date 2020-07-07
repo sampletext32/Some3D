@@ -109,9 +109,7 @@ namespace Some3D
         {
             screen.Dispose();
             screen = new DirectBitmap(ClientSize.Width, ClientSize.Height);
-            Vector3f camPos = camera.Position;
-            camera = new Camera(10000, 1, (float) screen.Width / screen.Height, 70);
-            camera.Position = camPos;
+            camera.AspectRatio = (float)screen.Width / screen.Height;
         }
     }
 }
