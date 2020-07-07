@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Some3D
 {
-    public class Mesh
+    public class Mesh : Object3D
     {
         public List<Triangle> Triangles { get; set; }
 

@@ -21,9 +21,9 @@ namespace Some3D
 
                     for (int i = 0; i < 3; i++)
                     {
-                        _tri[i].X -= camera.Position.X;
-                        _tri[i].Y -= camera.Position.Y;
-                        _tri[i].Z -= camera.Position.Z;
+                        _tri[i].X -= camera.Position.X - mesh.Position.X;
+                        _tri[i].Y -= camera.Position.Y - mesh.Position.Y;
+                        _tri[i].Z -= camera.Position.Z - mesh.Position.Z;
 
                         _tri[i] *= projectionMatrix;
 
