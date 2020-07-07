@@ -32,21 +32,14 @@ namespace Some3D
                         tri[i].Y *= screen.Height / 2f;
                     }
 
-                    SomeDrawing.Line(screen,
-                        tri[0].X,
-                        tri[0].Y,
-                        tri[1].X,
-                        tri[1].Y, unchecked((int) 0xFF000000));
-                    SomeDrawing.Line(screen,
-                        tri[1].X,
-                        tri[1].Y,
-                        tri[2].X,
-                        tri[2].Y, unchecked((int) 0xFF000000));
-                    SomeDrawing.Line(screen,
-                        tri[2].X,
-                        tri[2].Y,
-                        tri[0].X,
-                        tri[0].Y, unchecked((int) 0xFF000000));
+                    for (int i = 0; i < 3; i++)
+                    {
+                        SomeDrawing.Line(screen,
+                            tri[i].X,
+                            tri[i].Y,
+                            tri[(i + 1) % 3].X,
+                            tri[(i + 1) % 3].Y, unchecked((int) 0xFF000000));
+                    }
                 }
             }
         }
