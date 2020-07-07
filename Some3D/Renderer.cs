@@ -21,11 +21,12 @@ namespace Some3D
 
                     for (int i = 0; i < 3; i++)
                     {
-                        _tri[i].X -= camera.Position.X - mesh.Position.X;
-                        _tri[i].Y -= camera.Position.Y - mesh.Position.Y;
-                        _tri[i].Z -= camera.Position.Z - mesh.Position.Z;
+                        // position is directly relative to mesh position
+                        // position is inverse relative to camera position
 
-                        _tri[i] *= projectionMatrix;
+                        _tri[i].AddSelf(mesh.Position).SubSelf(camera.Position);
+
+                        _tri[i].MultiplySelf(projectionMatrix);
 
                         _tri[i].X += 1.0f;
                         _tri[i].Y += 1.0f;
