@@ -23,13 +23,12 @@ namespace Some3D.Render
             AspectRatio = aspectRatio;
             FOV = fov;
 
+            ProjectionMatrix = new MatrixF(4, 4);
             MakeProjectionMatrix();
         }
 
         private void MakeProjectionMatrix()
         {
-            ProjectionMatrix = new MatrixF(4, 4);
-
             float inverseFOV = (float) (1 / Math.Tan(FOV / 2 * Math.PI / 180f));
             float clippingTrapezeRelation = ZFar / (ZFar - ZNear);
 
