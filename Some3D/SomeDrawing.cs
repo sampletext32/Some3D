@@ -9,8 +9,7 @@ namespace Some3D
     public class SomeDrawing
     {
         //Done, using EFLA-E Algorithm (http://www.edepot.com/algorithm.html)
-        public static void FastLineAlgorithm(DirectBitmap bitmap, int startX, int startY, int endX, int endY,
-            int color)
+        public static void Line(DirectBitmap bitmap, int startX, int startY, int endX, int endY, int color)
         {
             bool yLonger = false;
             int shortLen = endY - startY;
@@ -69,6 +68,11 @@ namespace Some3D
                 bitmap.SetPixel(startX, j >> 16, color);
                 j -= decInc;
             }
+        }
+
+        public static void Line(DirectBitmap bitmap, float startX, float startY, float endX, float endY, int color)
+        {
+            Line(bitmap, (int)startX, (int)startY, (int)endX, (int)endY, color);
         }
     }
 }

@@ -41,6 +41,8 @@
             this.Text = "Some3D";
             this.Load += new System.EventHandler(this.Form3D_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form3D_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form3D_KeyDown);
+            this.Resize += new System.EventHandler(this.Form3D_Resize);
             this.ResumeLayout(false);
 
         }

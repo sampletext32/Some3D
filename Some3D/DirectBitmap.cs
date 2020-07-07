@@ -28,7 +28,8 @@ namespace Some3D
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPixel(int x, int y, int color)
         {
-            Bits[x + y * Width] = color;
+            if (x >= 0 && x < Width && y >= 0 && y < Height)
+                Bits[x + y * Width] = color;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

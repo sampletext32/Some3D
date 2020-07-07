@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
+    <Compile Include="Cube.cs" />
     <Compile Include="DirectBitmap.cs" />
     <Compile Include="Form3D.cs">
       <SubType>Form</SubType>
@@ -53,10 +55,17 @@
     <Compile Include="Form3D.Designer.cs">
       <DependentUpon>Form3D.cs</DependentUpon>
     </Compile>
+    <Compile Include="MatrixF.cs" />
+    <Compile Include="Mesh.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Object3D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer.cs" />
     <Compile Include="SomeDrawing.cs" />
+    <Compile Include="Triangle.cs" />
+    <Compile Include="Vector3f.cs" />
+    <Compile Include="World.cs" />
     <EmbeddedResource Include="Form3D.resx">
       <DependentUpon>Form3D.cs</DependentUpon>
     </EmbeddedResource>
