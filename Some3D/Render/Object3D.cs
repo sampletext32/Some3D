@@ -67,6 +67,12 @@ namespace Some3D.Render
             Position = 0;
             Scale = 1;
             Rotation = 0;
+            _translationMatrix = new MatrixF(4, 4);
+            _scaleMatrix = new MatrixF(4, 4);
+            _rotationMatrix = new MatrixF(4, 4);
+            CalculateRotationMatrix();
+            CalculateScaleMatrix();
+            CalculateTranslationMatrix();
         }
 
         public Object3D(Vector3f position, Vector3f scale, Vector3f rotation)
@@ -74,6 +80,12 @@ namespace Some3D.Render
             Position = position;
             Scale = scale;
             Rotation = rotation;
+            _translationMatrix = new MatrixF(4, 4);
+            _scaleMatrix = new MatrixF(4, 4);
+            _rotationMatrix = new MatrixF(4, 4);
+            CalculateRotationMatrix();
+            CalculateScaleMatrix();
+            CalculateTranslationMatrix();
         }
     }
 }
