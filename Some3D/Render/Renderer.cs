@@ -1,10 +1,11 @@
-﻿using System.Drawing;
+﻿using System;
 using Some3D.Utils;
 
 namespace Some3D.Render
 {
     public class Renderer
     {
+        private Vector3f _cameraRay = new Vector3f();
         private Triangle _tri = new Triangle();
         private MatrixF modelMatrix = new MatrixF(4, 4);
 
@@ -22,6 +23,18 @@ namespace Some3D.Render
                 foreach (var triangle in mesh.Triangles)
                 {
                     triangle.Duplicate(_tri);
+
+                    var normal = SomeMaths.Cross(_tri[0], _tri[1], _tri[2]);
+                    normal.MultiplySelf(1 / normal.Length); // normalize
+
+                    _cameraRay = _tri[0] - camera.Position;
+
+                    // normalization is normally before this check, just 
+                    if (normal.Dot(_cameraRay) < 0)
+                    {
+                        // clip invisible triangles
+                        continue;
+                    }
 
                     // считаем матрицу модели
 
@@ -48,10 +61,6 @@ namespace Some3D.Render
                         _tri[i].X *= screen.Width / 2f;
                         _tri[i].Y *= screen.Height / 2f;
                     }
-
-                    int luminance = 0xFF;
-
-                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
 
                     SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], color);
                     
