@@ -7,6 +7,16 @@ namespace Some3D.Utils
         //Done, using EFLA-E Algorithm (http://www.edepot.com/algorithm.html)
         public static void Line(DirectBitmap bitmap, int startX, int startY, int endX, int endY, int color)
         {
+            if (Math.Abs(endX - startX) > bitmap.Width + bitmap.Height)
+            {
+                return;
+            }
+
+            if (Math.Abs(endY - startY) > bitmap.Width + bitmap.Height)
+            {
+                return;
+            }
+
             bool yLonger = false;
             int shortLen = endY - startY;
             int longLen = endX - startX;
