@@ -16,9 +16,7 @@ namespace Some3D.Utils
             set => _array[j + i * _width] = value;
         }
 
-        public static MatrixF operator *(MatrixF m1, MatrixF m2)
         {
-            MatrixF m = new MatrixF(m1._width, m1._height);
 
         public MatrixF MakeIdentity()
         {
@@ -131,6 +129,13 @@ namespace Some3D.Utils
             m[2, 3] = -vector.Z;
             return this.MultiplySelf(m);
         }
+
+        public static MatrixF operator *(MatrixF m1, MatrixF m2)
+        {
+            MatrixF m = new MatrixF(m1._width, m1._height);
+
+            m1.Duplicate(m);
+            m1.MultiplySelf(m2);
 
             return m;
         }
