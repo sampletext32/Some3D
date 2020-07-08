@@ -48,6 +48,16 @@ namespace Some3D.Utils
                 }
             }
 
+        public MatrixF ScaleSelf(float scaleX, float scaleY, float scaleZ)
+        {
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = scaleX;
+            m[1, 1] = scaleY;
+            m[2, 2] = scaleZ;
+            m[3, 3] = 1;
+            return this.MultiplySelf(m);
+        }
+
             return m;
         }
 
