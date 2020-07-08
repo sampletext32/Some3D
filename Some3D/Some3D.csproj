@@ -64,6 +64,7 @@
     <Compile Include="Render\Renderer.cs" />
     <Compile Include="Utils\SomeDrawing.cs" />
     <Compile Include="Render\Triangle.cs" />
+    <Compile Include="Utils\SomeMaths.cs" />
     <Compile Include="Utils\Vector3f.cs" />
     <Compile Include="Render\World.cs" />
     <EmbeddedResource Include="Form3D.resx">
