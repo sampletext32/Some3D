@@ -54,6 +54,7 @@ namespace Some3D.Utils
             X = x;
             Y = y;
             Z = z;
+            CalculateLength();
         }
 
         private void CalculateLength()
@@ -66,6 +67,8 @@ namespace Some3D.Utils
             to.X = X;
             to.Y = Y;
             to.Z = Z;
+
+            to._length = _length;
         }
 
         public float Dot(Vector3f vec)
@@ -92,6 +95,7 @@ namespace Some3D.Utils
                 Z /= w;
             }
 
+            CalculateLength();
 
             return this;
         }
@@ -113,6 +117,8 @@ namespace Some3D.Utils
             Y += v.Y;
             Z += v.Z;
 
+            CalculateLength();
+
             return this;
         }
 
@@ -121,6 +127,8 @@ namespace Some3D.Utils
             X -= v.X;
             Y -= v.Y;
             Z -= v.Z;
+
+            CalculateLength();
 
             return this;
         }
