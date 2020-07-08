@@ -53,7 +53,15 @@ namespace Some3D
 
             camera.Position = new Vector3f(0, 0, -2);
 
-            Application.Idle += OnApplicationIdle;
+            if (false)
+            {
+                renderer.Render(world, camera, screen);
+                Refresh();
+            }
+            else
+            {
+                Application.Idle += OnApplicationIdle;
+            }
         }
 
         private void OnApplicationIdle(object sender, EventArgs e)
