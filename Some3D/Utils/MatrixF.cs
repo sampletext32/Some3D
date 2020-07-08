@@ -106,6 +106,32 @@ namespace Some3D.Utils
             return this.MultiplySelf(m);
         }
 
+        public MatrixF TranslateToSelf(Vector3f vector)
+        {
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = 1;
+            m[1, 1] = 1;
+            m[2, 2] = 1;
+            m[3, 3] = 1;
+            m[0, 3] = vector.X;
+            m[1, 3] = vector.Y;
+            m[2, 3] = vector.Z;
+            return this.MultiplySelf(m);
+        }
+
+        public MatrixF TranslateFromSelf(Vector3f vector)
+        {
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = 1;
+            m[1, 1] = 1;
+            m[2, 2] = 1;
+            m[3, 3] = 1;
+            m[0, 3] = -vector.X;
+            m[1, 3] = -vector.Y;
+            m[2, 3] = -vector.Z;
+            return this.MultiplySelf(m);
+        }
+
             return m;
         }
 
