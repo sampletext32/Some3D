@@ -6,17 +6,20 @@ namespace Some3D.Render
     {
         public Vector3f Position { get; set; }
         public Vector3f Scale { get; set; }
+        public Vector3f Rotation { get; private set; }
 
         public Object3D()
         {
             Position = 0;
             Scale = 0;
+            Rotation = 0;
         }
 
-        public Object3D(Vector3f position, Vector3f scale)
+        public Object3D(Vector3f position, Vector3f scale, Vector3f rotation)
         {
             Position = position;
             Scale = scale;
+            Rotation = rotation;
         }
     }
 }
