@@ -148,6 +148,44 @@ namespace Some3D.Utils
             return this.MultiplySelf(m);
         }
 
+        public MatrixF InverseSelf()
+        {
+            float[] vals = new float[_width * _height];
+            vals[0] = this[0, 0];
+            vals[1] = this[1, 0];
+            vals[2] = this[2, 0];
+            vals[3] = 0f;
+            vals[4] = this[0, 1];
+            vals[5] = this[1, 1];
+            vals[6] = this[2, 1];
+            vals[7] = 0f;
+            vals[8] = this[0, 2];
+            vals[9] = this[1, 2];
+            vals[10] = this[2, 2];
+            vals[11] = 0f;
+            vals[12] = -(this[3, 0] * vals[0] + this[3, 1] * vals[4] + this[3, 2] * vals[8]);
+            vals[13] = -(this[3, 0] * vals[1] + this[3, 1] * vals[5] + this[3, 2] * vals[9]);
+            vals[14] = -(this[3, 0] * vals[2] + this[3, 1] * vals[6] + this[3, 2] * vals[10]);
+            vals[15] = 1.0f;
+
+            for (int i = 0; i < _array.Length; i++)
+            {
+                this._array[i] = vals[i];
+            }
+
+            return this;
+        }
+
+        public MatrixF Inverse()
+        {
+            MatrixF m = new MatrixF(this._width, this._height);
+
+            this.Duplicate(m);
+            m.InverseSelf();
+
+            return m;
+        }
+
         public static MatrixF operator *(MatrixF m1, MatrixF m2)
         {
             MatrixF m = new MatrixF(m1._width, m1._height);
