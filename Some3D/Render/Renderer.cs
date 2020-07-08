@@ -12,7 +12,7 @@ namespace Some3D.Render
         {
 
             // Матрица вида = матрице перемещения камеры
-            var viewMatrix = camera.TranslationMatrix; 
+            var viewMatrix = camera.TranslationMatrix.Inverse();
 
             // матрица проекции
             var projectionMatrix = camera.ProjectionMatrix;
