@@ -7,12 +7,16 @@ namespace Some3D.Utils
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
+        private float _length;
+
+        public float Length => _length;
 
         public Vector3f()
         {
             X = 0;
             Y = 0;
             Z = 0;
+            _length = 0;
         }
 
         public Vector3f(float x, float y, float z)
