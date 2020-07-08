@@ -41,16 +41,28 @@ namespace Some3D.Utils
 
             return this;
         }
+
+        public MatrixF MultiplySelf(MatrixF m)
+        {
+            float[] vals = new float[_width * _height];
             for (int i = 0; i < m._width; i++)
             {
                 for (int j = 0; j < m._height; j++)
                 {
                     for (int k = 0; k < m._width; k++)
                     {
-                        m[i, j] += m1[i, k] * m2[k, j];
+                        vals[j + i * _width] += _array[k + i * _width] * m._array[j + k * _width];
                     }
                 }
             }
+
+            for (int i = 0; i < _array.Length; i++)
+            {
+                this._array[i] = vals[i];
+            }
+
+            return this;
+        }
 
         public MatrixF ScaleSelf(float scaleX, float scaleY, float scaleZ)
         {
