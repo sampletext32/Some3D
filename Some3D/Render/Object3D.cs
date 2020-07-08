@@ -4,8 +4,8 @@ namespace Some3D.Render
 {
     public class Object3D
     {
-        public Vector3f Position { get; set; }
-        public Vector3f Scale { get; set; }
+        public Vector3f Position { get; private set; }
+        public Vector3f Scale { get; private set; }
         public Vector3f Rotation { get; private set; }
 
         public Object3D()
