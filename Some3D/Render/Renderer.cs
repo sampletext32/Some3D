@@ -11,6 +11,8 @@ namespace Some3D.Render
 
         public void Render(World world, Camera camera, DirectBitmap screen)
         {
+            Vector3f light = new Vector3f(0, 1, 0);
+            light.MultiplySelf(1 / light.Length);
 
             // Матрица вида = матрице перемещения камеры
             var viewMatrix = camera.TranslationMatrix.Inverse();
@@ -49,6 +51,18 @@ namespace Some3D.Render
                     for (int i = 0; i < 3; i++)
                     {
                         _tri[i].MultiplySelf(modelMatrix);
+                    }
+
+                    float dp = light.Dot(normal);
+
+
+                    int luminance = (int)(Math.Max(0.3f, Math.Min(dp, 0.95f)) * 0xFF) & 0xFF;
+
+                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
+
+                    // проецируем точки треугольника по правилу MVP (model view project)
+                    for (int i = 0; i < 3; i++)
+                    {
                         _tri[i].MultiplySelf(viewMatrix);
                         _tri[i].MultiplySelf(projectionMatrix);
                     }
