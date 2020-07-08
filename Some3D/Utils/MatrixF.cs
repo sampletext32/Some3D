@@ -158,6 +158,18 @@ namespace Some3D.Utils
             return m;
         }
 
+        public override string ToString()
+        {
+            string s = "";
+
+            for (int i = 0; i < _height; i++)
+            {
+                s += string.Join(" ", _array.Skip(i * _width).Take(_width)) + "\n";
+            }
+
+            return s;
+        }
+
         public MatrixF(int width, int height)
         {
             _width = width;
