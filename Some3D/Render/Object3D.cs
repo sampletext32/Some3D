@@ -11,7 +11,7 @@ namespace Some3D.Render
         public Object3D()
         {
             Position = 0;
-            Scale = 0;
+            Scale = 1;
             Rotation = 0;
         }
 
