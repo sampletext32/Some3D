@@ -51,7 +51,7 @@ namespace Some3D
             screen = new DirectBitmap(ClientSize.Width, ClientSize.Height);
             camera = new Camera(100, 5, (float)screen.Height / screen.Width, 90);
 
-            camera.Position = new Vector3f(0, 0, -2);
+            camera.SetPosition(new Vector3f(0, 0, -2));
 
             if (false)
             {
@@ -89,27 +89,27 @@ namespace Some3D
 
             if (e.KeyCode == Keys.W)
             {
-                camera.Position.Z += speed;
+                camera.SetPosition(camera.Position.AddSelf(new Vector3f(0, 0, speed)));
             }
             else if (e.KeyCode == Keys.S)
             {
-                camera.Position.Z -= speed;
+                camera.SetPosition(camera.Position.SubSelf(new Vector3f(0, 0, speed)));
             }
             else if (e.KeyCode == Keys.A)
             {
-                camera.Position.X -= speed;
+                camera.SetPosition(camera.Position.SubSelf(new Vector3f(speed, 0, 0)));
             }
             else if (e.KeyCode == Keys.D)
             {
-                camera.Position.X += speed;
+                camera.SetPosition(camera.Position.AddSelf(new Vector3f(speed, 0, 0)));
             }
             else if (e.KeyCode == Keys.C)
             {
-                camera.Position.Y += speed;
+                camera.SetPosition(camera.Position.AddSelf(new Vector3f(0, speed, 0)));
             }
             else if (e.KeyCode == Keys.Space)
             {
-                camera.Position.Y -= speed;
+                camera.SetPosition(camera.Position.SubSelf(new Vector3f(0, speed, 0)));
             }
         }
 
