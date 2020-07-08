@@ -1,4 +1,7 @@
-﻿namespace Some3D.Utils
+﻿using System;
+using System.Linq;
+
+namespace Some3D.Utils
 {
     public class MatrixF
     {
