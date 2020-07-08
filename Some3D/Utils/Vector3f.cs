@@ -54,6 +54,8 @@ namespace Some3D.Utils
             X = x;
             Y = y;
             Z = z;
+        }
+
         private void CalculateLength()
         {
             _length = (float)Math.Sqrt(X * X + Y * Y + Z * Z);
@@ -85,6 +87,18 @@ namespace Some3D.Utils
                 Z /= w;
             }
 
+
+            return this;
+        }
+
+        public Vector3f MultiplySelf(float f)
+        {
+            X *= f;
+            Y *= f;
+            Z *= f;
+
+            CalculateLength();
+
             return this;
         }
 
@@ -112,6 +126,16 @@ namespace Some3D.Utils
             self.Duplicate(v);
 
             v.MultiplySelf(m);
+
+            return v;
+        }
+
+        public static Vector3f operator *(Vector3f self, float f)
+        {
+            Vector3f v = new Vector3f();
+            self.Duplicate(v);
+
+            v.MultiplySelf(f);
 
             return v;
         }
