@@ -24,6 +24,25 @@ namespace Some3D.Render
         }
 
         public Vector3f Scale { get; private set; }
+
+        private MatrixF _scaleMatrix;
+        public MatrixF ScaleMatrix => _scaleMatrix;
+
+        public void SetScale(Vector3f scale)
+        {
+            Scale = scale;
+            CalculateScaleMatrix();
+        }
+
+        private void CalculateScaleMatrix()
+        {
+            _scaleMatrix.MakeIdentity();
+            _scaleMatrix[0, 0] = Scale.X;
+            _scaleMatrix[1, 1] = Scale.Y;
+            _scaleMatrix[2, 2] = Scale.Z;
+            _scaleMatrix[3, 3] = 1;
+        }
+
         public Vector3f Rotation { get; private set; }
 
         public Object3D()
