@@ -9,8 +9,8 @@
 
         public float this[int i, int j]
         {
-            get => _array[i + j * _width];
-            set => _array[i + j * _width] = value;
+            get => _array[j + i * _width];
+            set => _array[j + i * _width] = value;
         }
 
         public static MatrixF operator *(MatrixF m1, MatrixF m2)
