@@ -24,6 +24,9 @@ namespace Some3D.Utils
             X = x;
             Y = y;
             Z = z;
+        private void CalculateLength()
+        {
+            _length = (float)Math.Sqrt(X * X + Y * Y + Z * Z);
         }
 
         public void Duplicate(Vector3f to)
