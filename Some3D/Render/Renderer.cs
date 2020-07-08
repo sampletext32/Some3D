@@ -1,32 +1,50 @@
-﻿using Some3D.Utils;
+﻿using System.Drawing;
+using Some3D.Utils;
 
 namespace Some3D.Render
 {
     public class Renderer
     {
         private Triangle _tri = new Triangle();
+        private MatrixF modelMatrix = new MatrixF(4, 4);
 
         public void Render(World world, Camera camera, DirectBitmap screen)
         {
+
+            // Матрица вида = матрице перемещения камеры
+            var viewMatrix = camera.TranslationMatrix; 
+
+            // матрица проекции
             var projectionMatrix = camera.ProjectionMatrix;
+
             foreach (var mesh in world.Meshes)
             {
                 foreach (var triangle in mesh.Triangles)
                 {
                     triangle.Duplicate(_tri);
 
+                    // считаем матрицу модели
+
+                    // !!! IMPORTANT http://opengl-tutorial.blogspot.com/p/3.html
+                    // Сначала нужно изменить размер, потом прокрутить и лишь потом сдвинуть.
+                    modelMatrix.MakeIdentity();
+                    modelMatrix.MultiplySelf(mesh.ScaleMatrix);
+                    modelMatrix.MultiplySelf(mesh.RotationMatrix);
+                    modelMatrix.MultiplySelf(mesh.TranslationMatrix);
+
+                    // проецируем точки треугольника по правилу MVP (model view project)
                     for (int i = 0; i < 3; i++)
                     {
-                        // position is directly relative to mesh position
-                        // position is inverse relative to camera position
-
-                        _tri[i].AddSelf(mesh.Position).SubSelf(camera.Position);
-
+                        _tri[i].MultiplySelf(modelMatrix);
+                        _tri[i].MultiplySelf(viewMatrix);
                         _tri[i].MultiplySelf(projectionMatrix);
+                    }
 
+                    // Подгоняем точки под экран
+                    for (int i = 0; i < 3; i++)
+                    {
                         _tri[i].X += 1.0f;
                         _tri[i].Y += 1.0f;
-
                         _tri[i].X *= screen.Width / 2f;
                         _tri[i].Y *= screen.Height / 2f;
                     }
