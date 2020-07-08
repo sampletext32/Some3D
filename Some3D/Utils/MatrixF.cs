@@ -16,7 +16,13 @@ namespace Some3D.Utils
             set => _array[j + i * _width] = value;
         }
 
+        public void Duplicate(MatrixF to)
         {
+            for (int i = 0; i < _array.Length; i++)
+            {
+                to._array[i] = _array[i];
+            }
+        }
 
         public MatrixF MakeIdentity()
         {
