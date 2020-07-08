@@ -45,6 +45,23 @@ namespace Some3D.Render
 
         public Vector3f Rotation { get; private set; }
 
+        private MatrixF _rotationMatrix;
+        public MatrixF RotationMatrix => _rotationMatrix;
+
+        public void SetRotation(Vector3f rotation)
+        {
+            Rotation = rotation;
+            CalculateRotationMatrix();
+        }
+
+        private void CalculateRotationMatrix()
+        {
+            _rotationMatrix.MakeIdentity();
+            _rotationMatrix.RotateXSelf(Rotation.X);
+            _rotationMatrix.RotateYSelf(Rotation.Y);
+            _rotationMatrix.RotateZSelf(Rotation.Z);
+        }
+
         public Object3D()
         {
             Position = 0;
