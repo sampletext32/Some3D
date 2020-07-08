@@ -20,6 +20,23 @@ namespace Some3D.Utils
         {
             MatrixF m = new MatrixF(m1._width, m1._height);
 
+        public MatrixF MakeIdentity()
+        {
+            for (int i = 0; i < _width; i++)
+            {
+                for (int j = 0; j < _height; j++)
+                {
+                    this[i, j] = 0;
+                }
+            }
+
+            for (int i = 0; i < _width; i++)
+            {
+                this[i, i] = 1;
+            }
+
+            return this;
+        }
             for (int i = 0; i < m._width; i++)
             {
                 for (int j = 0; j < m._height; j++)
