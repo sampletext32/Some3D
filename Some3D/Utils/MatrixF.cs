@@ -58,6 +58,54 @@ namespace Some3D.Utils
             return this.MultiplySelf(m);
         }
 
+        public MatrixF RotateXSelf(float angle)
+        {
+            var angleRad = angle / 180 * Math.PI;
+            var cos = (float)Math.Cos(angleRad);
+            var sin = (float)Math.Sin(angleRad);
+
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = 1;
+            m[1, 1] = cos;
+            m[1, 2] = -sin;
+            m[2, 1] = sin;
+            m[2, 2] = cos;
+            m[3, 3] = 1;
+            return this.MultiplySelf(m);
+        }
+
+        public MatrixF RotateYSelf(float angle)
+        {
+            var angleRad = angle / 180 * Math.PI;
+            var cos = (float)Math.Cos(angleRad);
+            var sin = (float)Math.Sin(angleRad);
+
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = cos;
+            m[0, 2] = sin;
+            m[1, 1] = 1;
+            m[2, 0] = -sin;
+            m[2, 2] = cos;
+            m[3, 3] = 1;
+            return this.MultiplySelf(m);
+        }
+
+        public MatrixF RotateZSelf(float angle)
+        {
+            var angleRad = angle / 180 * Math.PI;
+            var cos = (float)Math.Cos(angleRad);
+            var sin = (float)Math.Sin(angleRad);
+
+            MatrixF m = new MatrixF(4, 4);
+            m[0, 0] = cos;
+            m[0, 1] = -sin;
+            m[1, 0] = sin;
+            m[1, 1] = cos;
+            m[2, 2] = 1;
+            m[3, 3] = 1;
+            return this.MultiplySelf(m);
+        }
+
             return m;
         }
 
