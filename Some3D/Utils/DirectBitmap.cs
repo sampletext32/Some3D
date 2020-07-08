@@ -40,7 +40,7 @@ namespace Some3D.Utils
 
         public void Clear()
         {
-            int c = 0xFFFFFF; // 0xFFFFFFFF
+            int c = unchecked((int)0xFF000000); // 0xFFFFFFFF
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
