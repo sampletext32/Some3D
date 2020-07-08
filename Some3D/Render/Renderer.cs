@@ -31,10 +31,12 @@ namespace Some3D.Render
                         _tri[i].Y *= screen.Height / 2f;
                     }
 
-                    for (int i = 0; i < 3; i++)
-                    {
-                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFF000000));
-                    }
+                    SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], unchecked((int)0xFF000000));
+                    
+                    // for (int i = 0; i < 3; i++)
+                    // {
+                    //     SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFF000000));
+                    // }
                 }
             }
         }
