@@ -49,7 +49,11 @@ namespace Some3D.Render
                         _tri[i].Y *= screen.Height / 2f;
                     }
 
-                    SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], unchecked((int)0xFF000000));
+                    int luminance = 0xFF;
+
+                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
+
+                    SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], color);
                     
                     // for (int i = 0; i < 3; i++)
                     // {
