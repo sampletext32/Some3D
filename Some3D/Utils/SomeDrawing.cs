@@ -85,5 +85,83 @@ namespace Some3D.Utils
         {
             Line(bitmap, (int)start.X, (int)start.Y, (int)end.X, (int)end.Y, color);
         }
+
+        public static void FillBottomFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        {
+            float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
+            float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
+
+            float curx1 = v1.X;
+            float curx2 = v1.X;
+
+            for (float scanlineY = v1.Y; scanlineY <= v2.Y; scanlineY++)
+            {
+                Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
+                curx1 += invslope1;
+                curx2 += invslope2;
+            }
+        }
+
+        public static void FillTopFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        {
+            float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
+            float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
+
+            float curx1 = v3.X;
+            float curx2 = v3.X;
+
+            for (float scanlineY = v3.Y; scanlineY > v1.Y; scanlineY--)
+            {
+                Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
+                curx1 -= invslope1;
+                curx2 -= invslope2;
+            }
+        }
+
+
+        public static void FillTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        {
+            /* at first sort the three vertices by y-coordinate ascending so v1 is the topmost vertice */
+            if (v1.Y > v2.Y)
+            {
+                Vector3f v = v1;
+                v1 = v2;
+                v2 = v;
+            }
+
+            if (v1.Y > v3.Y)
+            {
+                Vector3f v = v1;
+                v1 = v3;
+                v3 = v;
+            }
+
+            if (v2.Y > v3.Y)
+            {
+                Vector3f v = v2;
+                v2 = v3;
+                v3 = v;
+            }
+
+            /* here we know that v1.y <= v2.y <= v3.y */
+            /* check for trivial case of bottom-flat triangle */
+            if (v2.Y == v3.Y)
+            {
+                FillBottomFlatTriangle(bitmap, v1, v2, v3, color);
+            }
+            /* check for trivial case of top-flat triangle */
+            else if (v1.Y == v2.Y)
+            {
+                FillTopFlatTriangle(bitmap, v1, v2, v3, color);
+            }
+            else
+            {
+                /* general case - split the triangle in a topflat and bottom-flat one */
+                Vector3f v4 = new Vector3f(
+                    (int)(v1.X + ((float)(v2.Y - v1.Y) / (float)(v3.Y - v1.Y)) * (v3.X - v1.X)), v2.Y, 0);
+                FillBottomFlatTriangle(bitmap, v1, v2, v4, color);
+                FillTopFlatTriangle(bitmap, v2, v4, v3, color);
+            }
+        }
     }
 }
