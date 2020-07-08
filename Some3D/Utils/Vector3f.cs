@@ -4,10 +4,40 @@ namespace Some3D.Utils
 {
     public class Vector3f
     {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
+        private float _x;
+        private float _y;
+        private float _z;
         private float _length;
+
+        public float X
+        {
+            get { return _x; }
+            set
+            {
+                _x = value;
+                CalculateLength();
+            }
+        }
+
+        public float Y
+        {
+            get { return _y; }
+            set
+            {
+                _y = value;
+                CalculateLength();
+            }
+        }
+
+        public float Z
+        {
+            get { return _z; }
+            set
+            {
+                _z = value;
+                CalculateLength();
+            }
+        }
 
         public float Length => _length;
 
