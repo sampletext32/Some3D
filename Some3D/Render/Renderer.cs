@@ -29,6 +29,8 @@ namespace Some3D.Render
                     // Duplicate triangle to not accidentally corrupt any data
                     triangle.Duplicate(_tri);
 
+                    #region Calculate Triangle To Camera Ray
+
                     bool preciseCameraRay = false;
                     if (preciseCameraRay)
                     {
@@ -47,12 +49,19 @@ namespace Some3D.Render
                         _cameraRay.Z = camera.Position.Z - _tri[0].Z;
                     }
 
+                    #endregion
+
+                    #region Calculate Triangle Normal
+
                     // CounterClockWise Model
                     // https://stackoverflow.com/questions/22171776/order-of-vector-cross-product-for-a-ccw-triangle
 
                     var normal = SomeMaths.Cross(_tri[0], _tri[1], _tri[2]);
                     normal.MultiplySelf(1 / normal.Length); // normalize
 
+                    #endregion
+
+                    #region Clip Invisible Triangles
 
                     if (normal.Dot(_cameraRay) < 0)
                     {
@@ -60,6 +69,9 @@ namespace Some3D.Render
                         continue;
                     }
 
+                    #endregion
+
+                    #region Calculate Model Matrix
 
                     // !!! IMPORTANT http://opengl-tutorial.blogspot.com/p/3.html
                     // Сначала нужно изменить размер, потом прокрутить и лишь потом сдвинуть.
@@ -68,7 +80,9 @@ namespace Some3D.Render
                     modelMatrix.MultiplySelf(mesh.RotationMatrix);
                     modelMatrix.MultiplySelf(mesh.TranslationMatrix);
 
+                    #endregion
 
+                    #region Project From 3D To 2D
 
                     // проецируем точки треугольника по правилу MVP (model view project)
                     for (int i = 0; i < 3; i++)
@@ -77,6 +91,10 @@ namespace Some3D.Render
                         _tri[i].MultiplySelf(viewMatrix);
                         _tri[i].MultiplySelf(projectionMatrix);
                     }
+
+                    #endregion
+
+                    #region Translate To Screen Center
 
                     // Сдвигаем точки в центр экрана
                     for (int i = 0; i < 3; i++)
@@ -87,22 +105,48 @@ namespace Some3D.Render
                         _tri[i].Y *= screen.Height / 2f;
                     }
 
+                    #endregion
+
+                    #region Calculate Light Alignment
+
                     float lightAlignment = light.Dot(normal);
+
+                    #endregion
+
+                    #region Calculate Color
 
                     int luminance = (int)(Math.Max(0.3f, Math.Min(lightAlignment, 0.95f)) * 0xFF) & 0xFF;
                     int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
                     // int color = 0xFF << 24 | random.Next(0, 255) << 16 | random.Next(0, 255) << 8 | random.Next(0, 255);
+
+                    #endregion
+
+                    #region Fill Solid
+
                     // SOLID
                     SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], color);
+
+                    #endregion
+
+                    #region Draw Wireframe
 
                     // WIREFRAME
                     for (int i = 0; i < 3; i++)
                     {
                         SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFFFFFFFF));
                     }
+
+                    #endregion
+
+                    #region Calculate Screen Space Triangle Center
+
                     var triScreenCenterX = (_tri[0].X + _tri[1].X + _tri[2].X) / 3f;
                     var triScreenCenterY = (_tri[0].Y + _tri[1].Y + _tri[2].Y) / 3f;
                     var triScreenCenterZ = (_tri[0].Z + _tri[1].Z + _tri[2].Z) / 3f;
+
+                    #endregion
+
+                    #region Draw Vertex To Center Line
 
                     // VERTEX TO CENTER
                     for (int i = 0; i < 3; i++)
@@ -110,6 +154,10 @@ namespace Some3D.Render
                         SomeDrawing.Line(screen, _tri[i].X, _tri[i].Y, triScreenCenterX, triScreenCenterY,
                             unchecked((int)0xFFFF0000));
                     }
+
+                    #endregion
+
+                    #region Draw Normal
 
                     float normalLength = 40;
 
@@ -119,6 +167,7 @@ namespace Some3D.Render
                         triScreenCenterY + normal.Y * normalLength,
                         unchecked((int)0xFF0000FF));
 
+                    #endregion
                 }
             }
         }
