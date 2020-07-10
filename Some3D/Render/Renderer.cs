@@ -26,12 +26,31 @@ namespace Some3D.Render
                 {
                     triangle.Duplicate(_tri);
 
+                    bool preciseCameraRay = false;
+                    if (preciseCameraRay)
+                    {
+                        var triWorldCenterX = (_tri[0].X + _tri[1].X + _tri[2].X) / 3f;
+                        var triWorldCenterY = (_tri[0].Y + _tri[1].Y + _tri[2].Y) / 3f;
+                        var triWorldCenterZ = (_tri[0].Z + _tri[1].Z + _tri[2].Z) / 3f;
+
+                        _cameraRay.X = camera.Position.X - triWorldCenterX;
+                        _cameraRay.Y = camera.Position.Y - triWorldCenterY;
+                        _cameraRay.Z = camera.Position.Z - triWorldCenterZ;
+                    }
+                    else
+                    {
+                        _cameraRay.X = camera.Position.X - _tri[0].X;
+                        _cameraRay.Y = camera.Position.Y - _tri[0].Y;
+                        _cameraRay.Z = camera.Position.Z - _tri[0].Z;
+                    }
+
+                    // CounterClockWise Model
+                    // https://stackoverflow.com/questions/22171776/order-of-vector-cross-product-for-a-ccw-triangle
+
                     var normal = SomeMaths.Cross(_tri[0], _tri[1], _tri[2]);
                     normal.MultiplySelf(1 / normal.Length); // normalize
 
-                    _cameraRay = _tri[0] - camera.Position;
 
-                    // normalization is normally before this check, just 
                     if (normal.Dot(_cameraRay) < 0)
                     {
                         // clip invisible triangles
@@ -58,6 +77,7 @@ namespace Some3D.Render
                     }
 
                     // Подгоняем точки под экран
+                    // Сдвигаем точки в центр экрана
                     for (int i = 0; i < 3; i++)
                     {
                         _tri[i].X += 1.0f;
@@ -71,8 +91,10 @@ namespace Some3D.Render
                     int luminance = (int)(Math.Max(0.3f, Math.Min(lightAlignment, 0.95f)) * 0xFF) & 0xFF;
                     int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
                     // int color = 0xFF << 24 | random.Next(0, 255) << 16 | random.Next(0, 255) << 8 | random.Next(0, 255);
+                    // SOLID
                     SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], color);
 
+                    // WIREFRAME
                     for (int i = 0; i < 3; i++)
                     {
                         SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFF000000));
