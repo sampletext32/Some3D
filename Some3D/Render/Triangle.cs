@@ -22,6 +22,11 @@ namespace Some3D.Render
             Points = new Vector3f[] {p1, p2, p3};
         }
 
+        public override string ToString()
+        {
+            return $"{nameof(Points)}: {string.Join<Vector3f>(",", Points)}";
+        }
+
         public void Duplicate(Triangle to)
         {
             Points[0].Duplicate(to[0]);

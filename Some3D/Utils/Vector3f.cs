@@ -173,6 +173,11 @@ namespace Some3D.Utils
             return v;
         }
 
+        public override string ToString()
+        {
+            return $"{nameof(X)}: {X}, {nameof(Y)}: {Y}, {nameof(Z)}: {Z}";
+        }
+
         public static implicit operator Vector3f(float value)
         {
             return new Vector3f(value, value, value);
