@@ -47,17 +47,12 @@ namespace Some3D.Render
                     modelMatrix.MultiplySelf(mesh.RotationMatrix);
                     modelMatrix.MultiplySelf(mesh.TranslationMatrix);
 
+
+
                     // проецируем точки треугольника по правилу MVP (model view project)
                     for (int i = 0; i < 3; i++)
                     {
                         _tri[i].MultiplySelf(modelMatrix);
-                    }
-
-
-
-                    // проецируем точки треугольника по правилу MVP (model view project)
-                    for (int i = 0; i < 3; i++)
-                    {
                         _tri[i].MultiplySelf(viewMatrix);
                         _tri[i].MultiplySelf(projectionMatrix);
                     }
