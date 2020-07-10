@@ -77,6 +77,7 @@ namespace Some3D
                 screen.Clear();
                 renderer.Render(world, camera, screen);
                 Refresh();
+                renderResetEvent.Set();
             }
         }
 
