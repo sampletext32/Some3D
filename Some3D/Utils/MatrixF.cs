@@ -186,6 +186,46 @@ namespace Some3D.Utils
             return m;
         }
 
+        public MatrixF LookAtSelf(Vector3f eye, Vector3f target, Vector3f upDirection)
+        {
+            Vector3f forward = eye - target;
+            forward.MultiplySelf(1 / forward.Length);
+
+            Vector3f left = SomeMaths.Cross(upDirection, forward);
+            left.MultiplySelf(1 / left.Length);
+
+            Vector3f up = SomeMaths.Cross(forward, left);
+            MatrixF matrix = new MatrixF(4, 4).MakeIdentity();
+
+            // set rotation part, inverse rotation matrix: M^-1 = M^T for Euclidean transform 
+            matrix[0, 0] = left.X;
+            matrix[1, 0] = left.Y;
+            matrix[2, 0] = left.Z;
+            matrix[0, 1] = up.X;
+            matrix[1, 1] = up.Y;
+            matrix[2, 1] = up.Z;
+            matrix[0, 2] = forward.X;
+            matrix[1, 2] = forward.Y;
+            matrix[2, 2] = forward.Z;
+
+            // set translation part 
+            matrix[3, 0] = -left.X * eye.X - left.Y * eye.Y - left.Z * eye.Z;
+            matrix[3, 1] = -up.X * eye.X - up.Y * eye.Y - up.Z * eye.Z;
+            matrix[3, 2] = -forward.X * eye.X - forward.Y * eye.Y - forward.Z * eye.Z;
+
+            this.MultiplySelf(matrix);
+            return this;
+        }
+
+        public MatrixF LookAt(Vector3f eye, Vector3f target, Vector3f upDirection)
+        {
+            MatrixF m = new MatrixF(4, 4);
+            this.Duplicate(m);
+
+            m.LookAtSelf(eye, target, upDirection);
+            return m;
+        }
+
         public static MatrixF operator *(MatrixF m1, MatrixF m2)
         {
             MatrixF m = new MatrixF(m1._width, m1._height);
