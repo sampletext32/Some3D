@@ -53,12 +53,7 @@ namespace Some3D.Render
                         _tri[i].MultiplySelf(modelMatrix);
                     }
 
-                    float dp = light.Dot(normal);
 
-
-                    int luminance = (int)(Math.Max(0.3f, Math.Min(dp, 0.95f)) * 0xFF) & 0xFF;
-
-                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
 
                     // проецируем точки треугольника по правилу MVP (model view project)
                     for (int i = 0; i < 3; i++)
@@ -76,6 +71,11 @@ namespace Some3D.Render
                         _tri[i].Y *= screen.Height / 2f;
                     }
 
+                    float lightAlignment = light.Dot(normal);
+
+                    int luminance = (int)(Math.Max(0.3f, Math.Min(lightAlignment, 0.95f)) * 0xFF) & 0xFF;
+                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
+                    // int color = 0xFF << 24 | random.Next(0, 255) << 16 | random.Next(0, 255) << 8 | random.Next(0, 255);
                     SomeDrawing.FillTriangle(screen, _tri[0], _tri[1], _tri[2], color);
 
                     for (int i = 0; i < 3; i++)
