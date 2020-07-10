@@ -76,6 +76,14 @@ namespace Some3D.Utils
             }
         }
 
+        public static void HorizontalLine(DirectBitmap bitmap, int startX, int endX, int Y, int color)
+        {
+            for (int i = startX; i <= endX; i++)
+            {
+                bitmap.SetPixel(i, Y, color);
+            }
+        }
+
         public static void Line(DirectBitmap bitmap, float startX, float startY, float endX, float endY, int color)
         {
             Line(bitmap, (int)startX, (int)startY, (int)endX, (int)endY, color);
@@ -96,7 +104,8 @@ namespace Some3D.Utils
 
             for (float scanlineY = v1.Y; scanlineY <= v2.Y; scanlineY++)
             {
-                Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
+                HorizontalLine(bitmap, (int)curx1, (int)curx2, (int)scanlineY, color);
+                // Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
                 curx1 += invslope1;
                 curx2 += invslope2;
             }
@@ -110,9 +119,10 @@ namespace Some3D.Utils
             float curx1 = v3.X;
             float curx2 = v3.X;
 
-            for (float scanlineY = v3.Y; scanlineY > v1.Y; scanlineY--)
+            for (float scanlineY = v3.Y; scanlineY >= v1.Y; scanlineY--)
             {
-                Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
+                HorizontalLine(bitmap, (int)curx1, (int)curx2, (int)scanlineY, color);
+                // Line(bitmap, curx1, scanlineY, curx2, scanlineY, color);
                 curx1 -= invslope1;
                 curx2 -= invslope2;
             }
@@ -158,7 +168,7 @@ namespace Some3D.Utils
             {
                 /* general case - split the triangle in a topflat and bottom-flat one */
                 Vector3f v4 = new Vector3f(
-                    (int)(v1.X + ((float)(v2.Y - v1.Y) / (float)(v3.Y - v1.Y)) * (v3.X - v1.X)), v2.Y, 0);
+                    (int)(v1.X + (v2.Y - v1.Y) / (v3.Y - v1.Y) * (v3.X - v1.X)), v2.Y, 0);
                 FillBottomFlatTriangle(bitmap, v1, v2, v4, color);
                 FillTopFlatTriangle(bitmap, v2, v4, v3, color);
             }
