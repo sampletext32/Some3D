@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Some3D.Utils;
 
 namespace Some3D.Render
@@ -59,7 +60,6 @@ namespace Some3D.Render
                         continue;
                     }
 
-                    // считаем матрицу модели
 
                     // !!! IMPORTANT http://opengl-tutorial.blogspot.com/p/3.html
                     // Сначала нужно изменить размер, потом прокрутить и лишь потом сдвинуть.
@@ -78,7 +78,6 @@ namespace Some3D.Render
                         _tri[i].MultiplySelf(projectionMatrix);
                     }
 
-                    // Подгоняем точки под экран
                     // Сдвигаем точки в центр экрана
                     for (int i = 0; i < 3; i++)
                     {
@@ -101,6 +100,25 @@ namespace Some3D.Render
                     {
                         SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFFFFFFFF));
                     }
+                    var triScreenCenterX = (_tri[0].X + _tri[1].X + _tri[2].X) / 3f;
+                    var triScreenCenterY = (_tri[0].Y + _tri[1].Y + _tri[2].Y) / 3f;
+                    var triScreenCenterZ = (_tri[0].Z + _tri[1].Z + _tri[2].Z) / 3f;
+
+                    // VERTEX TO CENTER
+                    for (int i = 0; i < 3; i++)
+                    {
+                        SomeDrawing.Line(screen, _tri[i].X, _tri[i].Y, triScreenCenterX, triScreenCenterY,
+                            unchecked((int)0xFFFF0000));
+                    }
+
+                    float normalLength = 40;
+
+                    // NORMAL
+                    SomeDrawing.Line(screen, triScreenCenterX, triScreenCenterY,
+                        triScreenCenterX + normal.X * normalLength,
+                        triScreenCenterY + normal.Y * normalLength,
+                        unchecked((int)0xFF0000FF));
+
                 }
             }
         }
