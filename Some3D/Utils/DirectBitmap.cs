@@ -9,7 +9,7 @@ namespace Some3D.Utils
     public class DirectBitmap : IDisposable
     {
         public Bitmap Bitmap;
-        public int[] Bits;
+        public uint[] Bits;
         public bool Disposed;
         public int Height;
         public int Width;
@@ -19,28 +19,28 @@ namespace Some3D.Utils
         {
             Width = width;
             Height = height;
-            Bits = new int[width * height];
+            Bits = new uint[width * height];
             BitsHandle = GCHandle.Alloc(Bits, GCHandleType.Pinned);
             Bitmap = new Bitmap(width, height, width * 4, PixelFormat.Format32bppPArgb,
                 BitsHandle.AddrOfPinnedObject());
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPixel(int x, int y, int color)
+        public void SetPixel(int x, int y, uint color)
         {
             if (x >= 0 && x < Width && y >= 0 && y < Height)
                 Bits[x + y * Width] = color;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int GetPixel(int x, int y)
+        public uint GetPixel(int x, int y)
         {
             return Bits[x + y * Width];
         }
 
         public void Clear()
         {
-            int c = unchecked((int)0xFF000000); // 0xFFFFFFFF
+            uint c = 0xFF000000; // 0xFFFFFFFF
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)

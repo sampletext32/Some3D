@@ -5,7 +5,7 @@ namespace Some3D.Utils
     public class SomeDrawing
     {
         //Done, using EFLA-E Algorithm (http://www.edepot.com/algorithm.html)
-        public static void Line(DirectBitmap bitmap, int startX, int startY, int endX, int endY, int color)
+        public static void Line(DirectBitmap bitmap, int startX, int startY, int endX, int endY, uint color)
         {
             if (Math.Abs(endX - startX) > bitmap.Width + bitmap.Height)
             {
@@ -76,7 +76,7 @@ namespace Some3D.Utils
             }
         }
 
-        public static void HorizontalLine(DirectBitmap bitmap, int startX, int endX, int Y, int color)
+        public static void HorizontalLine(DirectBitmap bitmap, int startX, int endX, int Y, uint color)
         {
             for (int i = startX; i <= endX; i++)
             {
@@ -84,17 +84,18 @@ namespace Some3D.Utils
             }
         }
 
-        public static void Line(DirectBitmap bitmap, float startX, float startY, float endX, float endY, int color)
+        public static void Line(DirectBitmap bitmap, float startX, float startY, float endX, float endY, uint color)
         {
             Line(bitmap, (int)startX, (int)startY, (int)endX, (int)endY, color);
         }
 
-        public static void Line(DirectBitmap bitmap, Vector3f start, Vector3f end, int color)
+        public static void Line(DirectBitmap bitmap, Vector3f start, Vector3f end, uint color)
         {
             Line(bitmap, (int)start.X, (int)start.Y, (int)end.X, (int)end.Y, color);
         }
 
-        public static void FillBottomFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        public static void FillBottomFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3,
+            uint color)
         {
             float invslope1 = (v2.X - v1.X) / (v2.Y - v1.Y);
             float invslope2 = (v3.X - v1.X) / (v3.Y - v1.Y);
@@ -111,7 +112,7 @@ namespace Some3D.Utils
             }
         }
 
-        public static void FillTopFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        public static void FillTopFlatTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, uint color)
         {
             float invslope1 = (v3.X - v1.X) / (v3.Y - v1.Y);
             float invslope2 = (v3.X - v2.X) / (v3.Y - v2.Y);
@@ -129,7 +130,7 @@ namespace Some3D.Utils
         }
 
 
-        public static void FillTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, int color)
+        public static void FillTriangle(DirectBitmap bitmap, Vector3f v1, Vector3f v2, Vector3f v3, uint color)
         {
             /* at first sort the three vertices by y-coordinate ascending so v1 is the topmost vertice */
             if (v1.Y > v2.Y)

@@ -115,8 +115,8 @@ namespace Some3D.Render
 
                     #region Calculate Color
 
-                    int luminance = (int)(Math.Max(0.3f, Math.Min(lightAlignment, 0.95f)) * 0xFF) & 0xFF;
-                    int color = 0xFF << 24 | luminance << 16 | luminance << 8 | luminance;
+                    uint luminance = (uint)(Math.Max(0.3f, Math.Min(lightAlignment, 0.95f)) * 0xFF) & 0xFF;
+                    uint color = 0xFFu << 24 | luminance << 16 | luminance << 8 | luminance;
                     // int color = 0xFF << 24 | random.Next(0, 255) << 16 | random.Next(0, 255) << 8 | random.Next(0, 255);
 
                     #endregion
@@ -133,7 +133,7 @@ namespace Some3D.Render
                     // WIREFRAME
                     for (int i = 0; i < 3; i++)
                     {
-                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], unchecked((int)0xFFFFFFFF));
+                        SomeDrawing.Line(screen, _tri[i], _tri[(i + 1) % 3], 0xFFFFFFFF);
                     }
 
                     #endregion
@@ -151,8 +151,7 @@ namespace Some3D.Render
                     // VERTEX TO CENTER
                     for (int i = 0; i < 3; i++)
                     {
-                        SomeDrawing.Line(screen, _tri[i].X, _tri[i].Y, triScreenCenterX, triScreenCenterY,
-                            unchecked((int)0xFFFF0000));
+                        SomeDrawing.Line(screen, _tri[i].X, _tri[i].Y, triScreenCenterX, triScreenCenterY, 0xFFFF0000);
                     }
 
                     #endregion
@@ -165,7 +164,7 @@ namespace Some3D.Render
                     SomeDrawing.Line(screen, triScreenCenterX, triScreenCenterY,
                         triScreenCenterX + normal.X * normalLength,
                         triScreenCenterY + normal.Y * normalLength,
-                        unchecked((int)0xFF0000FF));
+                        0xFF0000FF);
 
                     #endregion
                 }
