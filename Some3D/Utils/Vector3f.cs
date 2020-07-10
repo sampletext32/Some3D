@@ -76,6 +76,11 @@ namespace Some3D.Utils
             return X * vec.X + Y * vec.Y + Z * vec.Z;
         }
 
+        public float Dot(float x, float y, float z)
+        {
+            return X * x + Y * y + Z * z;
+        }
+
         public Vector3f MultiplySelf(MatrixF m)
         {
             float tX = X;
