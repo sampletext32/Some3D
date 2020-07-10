@@ -17,10 +17,10 @@ namespace Some3D.Utils
             return v;
         }
 
-        public static Vector3f Cross(Vector3f v1, Vector3f v2, Vector3f v3)
+        public static Vector3f Cross(Vector3f v0, Vector3f v1, Vector3f v2)
         {
-            Vector3f line1 = v2 - v1;
-            Vector3f line2 = v3 - v1;
+            Vector3f line1 = v1 - v0;
+            Vector3f line2 = v2 - v0;
             return Cross(line1, line2);
         }
     }
