@@ -22,8 +22,10 @@ namespace Some3D.Render
 
             foreach (var mesh in world.Meshes)
             {
+                var random = new Random(0);
                 foreach (var triangle in mesh.Triangles)
                 {
+                    // Duplicate triangle to not accidentally corrupt any data
                     triangle.Duplicate(_tri);
 
                     bool preciseCameraRay = false;
