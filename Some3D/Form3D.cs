@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Some3D.Render;
@@ -24,6 +25,8 @@ namespace Some3D
         private Camera camera;
 
         private Mesh mesh;
+
+        AutoResetEvent renderResetEvent = new AutoResetEvent(false);
 
         public Form3D()
         {
@@ -55,19 +58,22 @@ namespace Some3D
 
             if (false)
             {
+                screen.Clear();
                 renderer.Render(world, camera, screen);
                 Refresh();
             }
             else
             {
                 Application.Idle += OnApplicationIdle;
+                renderResetEvent.Set();
             }
         }
 
-        private void OnApplicationIdle(object sender, EventArgs e)
+        private async void OnApplicationIdle(object sender, EventArgs e)
         {
             while (NativeMethods.AppIsIdle())
             {
+                await Task.Run(()=>renderResetEvent.WaitOne());
                 screen.Clear();
                 renderer.Render(world, camera, screen);
                 Refresh();
@@ -111,6 +117,8 @@ namespace Some3D
             {
                 camera.SetPosition(camera.Position.SubSelf(new Vector3f(0, speed, 0)));
             }
+
+            renderResetEvent.Set();
         }
 
         private void Form3D_Resize(object sender, EventArgs e)
@@ -118,6 +126,7 @@ namespace Some3D
             screen.Dispose();
             screen = new DirectBitmap(ClientSize.Width, ClientSize.Height);
             camera.AspectRatio = (float)screen.Width / screen.Height;
+            renderResetEvent.Set();
         }
     }
 }
