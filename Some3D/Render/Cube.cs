@@ -6,29 +6,66 @@ namespace Some3D.Render
     {
         public Cube(float size)
         {
-            // SOUTH
-            Triangles.Add(new Triangle(new Vector3f(0, 0, 0), new Vector3f(0, size, 0), new Vector3f(size, size, 0)));
-            Triangles.Add(new Triangle(new Vector3f(0, 0, 0), new Vector3f(size, size, 0), new Vector3f(size, 0, 0)));
+            float sizeHalf = size / 2f;
+            // BACK
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, -sizeHalf, -sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, -sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, -sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, -sizeHalf, -sizeHalf)));
 
-            // EAST 
-            Triangles.Add(new Triangle(new Vector3f(size, 0, 0), new Vector3f(size, size, 0), new Vector3f(size, size, size)));
-            Triangles.Add(new Triangle(new Vector3f(size, 0, 0), new Vector3f(size, size, size), new Vector3f(size, 0, size)));
+            // LEFT 
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(sizeHalf, -sizeHalf, sizeHalf)));
 
-            // NORTH 
-            Triangles.Add(new Triangle(new Vector3f(size, 0, size), new Vector3f(size, size, size), new Vector3f(0, size, size)));
-            Triangles.Add(new Triangle(new Vector3f(size, 0, size), new Vector3f(0, size, size), new Vector3f(0, 0, size)));
+            // FRONT 
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, -sizeHalf, sizeHalf)));
 
-            // WEST
-            Triangles.Add(new Triangle(new Vector3f(0, 0, size), new Vector3f(0, size, size), new Vector3f(0, size, 0)));
-            Triangles.Add(new Triangle(new Vector3f(0, 0, size), new Vector3f(0, size, 0), new Vector3f(0, 0, 0)));
+            // RIGHT
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, -sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(-sizeHalf, -sizeHalf, -sizeHalf)));
 
             // TOP  
-            Triangles.Add(new Triangle(new Vector3f(0, size, 0), new Vector3f(0, size, size), new Vector3f(size, size, size)));
-            Triangles.Add(new Triangle(new Vector3f(0, size, 0), new Vector3f(size, size, size), new Vector3f(size, size, 0)));
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(-sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(-sizeHalf, sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, sizeHalf),
+                new Vector3f(sizeHalf, sizeHalf, -sizeHalf)));
 
             // BOTTOM
-            Triangles.Add(new Triangle(new Vector3f(size, 0, size), new Vector3f(0, 0, size), new Vector3f(0, 0, 0)));
-            Triangles.Add(new Triangle(new Vector3f(size, 0, size), new Vector3f(0, 0, 0), new Vector3f(size, 0, 0)));
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, -sizeHalf, -sizeHalf)));
+            Triangles.Add(new Triangle(
+                new Vector3f(sizeHalf, -sizeHalf, sizeHalf),
+                new Vector3f(-sizeHalf, -sizeHalf, -sizeHalf),
+                new Vector3f(sizeHalf, -sizeHalf, -sizeHalf)));
         }
     }
 }
